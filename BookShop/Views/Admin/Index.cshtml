@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Domain.Models.Book>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="">
+    <div class="">
+        <table class="table table-striped table-condensed table-bordered">
+            <tr>
+                <th class="text-right">
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Author)
+                </th>
+                <th class="text-right">
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th class="text-center">
+                    Действия
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-right">
+                        @item.Id
+                    </td>
+                    <td>
+                        <a asp-controller="Admin" asp-action="Edit" asp-route-id="@item.Id">@item.Name</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Author)
+                    </td>
+                    <td class="text-right">
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td class="text-center">
+                        @using (Html.BeginForm("Delete", "Admin"))
+                        {
+                            @Html.Hidden("id", item.Id)
+                            <input type="submit" class="btn btn-danger" value="Удалить" />
+                        }
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+
+    <div class="position-relative">
+        <a asp-controller="Books" asp-action="List" class="btn btn-warning position-absolute top-0 start-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"/>
+              <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
+            </svg>
+        </a>
+
+        <a asp-controller="Admin" asp-action="Create" class="btn btn-success position-absolute top-0 end-0">Добавить книгу</a>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+﻿@model Domain.Models.ShippingDetails
+
+@{
+    ViewBag.Title = "Форма заказа";
+}
+
+<h2>Оформить заказ</h2>
+<p>Пожалуйста, введите Ваши контактные данные.</p>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary();
+
+    <div class="form-group">
+        <label>Ваше имя:</label>
+        @Html.TextBoxFor(x => x.Name, new { @class = "form-control"})
+    </div>
+
+    <div class="form-group">
+        <label>Адрес</label>
+        @Html.TextBoxFor(x => x.Address, new { @class = "form-control"})
+    </div>
+
+     <div class="form-group">
+        <label>Город</label>
+        @Html.TextBoxFor(x => x.City, new { @class = "form-control"})
+    </div>
+
+     <div class="form-group">
+        <label>Страна</label>
+        @Html.TextBoxFor(x => x.Country, new { @class = "form-control"})
+    </div>
+
+    <h3>Опции</h3>
+    <div class="form-group">
+        <label>
+            @Html.EditorFor(x => x.GiftWrap)
+            Использовать подарочную упаковку?
+        </label>
+    </div>
+    
+    <div class="text-center">
+        <input class="btn btn-primary" type="submit" value="Обработать заказ"/>
+    </div>
+}

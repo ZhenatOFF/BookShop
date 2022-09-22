@@ -1,0 +1,40 @@
+﻿@model CartIndexViewModel
+
+@{
+	ViewBag.Title = "Буквоед. Ваша корзина";
+}
+
+<table class="table">
+	<thead>
+		<tr>
+            <th>Наименование</th>
+            <th class="text-right">Цена</th>
+            <th>Количество</th>
+            <th class="text-right">Сумма</th>
+            <th></th>
+        </tr>
+	</thead>
+
+    <tbody>
+        @foreach (var item in Model.Cart.Items)
+        {
+            <tr>
+                <td class="text-left">@item.Book.Name - @item.Book.Author</td>
+                <td class="text-right">@item.Book.Price.ToString("# ₽")</td>
+                <td class="text-center">@item.Quantity</td>
+                <td class="text-right">@((item.Quantity * item.Book.Price).ToString("# ₽"))</td>
+                <td>
+                    <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@item.Book.Id" class="btn btn-outline-warning">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <td colspan="4" class="text-end" style="font-size:large; font-weight: bold">Итого:</td>
+        <td class="text-start" style="font-size:large; font-weight: bold">@Model.Cart.TotatValue().ToString("# руб")</td>
+    </tfoot>
+</table>
+<div class="text-center">
+    <a asp-controller="Books" asp-action="List" class="btn btn-outline-info">Продолжить покупки</a>
+    <a asp-controller="Cart" asp-action="Checkout" class="btn btn-outline-success">Оформить заказ</a>
+</div>

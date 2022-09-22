@@ -1,0 +1,18 @@
+﻿@model Domain.Models.Cart
+
+<div class="">
+    @Html.ActionLink("Заказать", "Index", "Cart",
+    new { @class = "btn btn-default navbar-btn" })
+</div>
+
+<div class="">
+    <a href=@Url.Action("Index", "Cart") class="btn btn-default navbar-btn">
+        <span class="glyphicon glyphicon-shopping-cart"></span>
+    </a>
+</div>
+
+<div class="navbar-text>
+    <b class="hidden-xs">Ваша корзина</b>
+    @Model.Items.Sum(x => x.Quantity) книг,
+    @Model.TotatValue().ToString("# руб ")
+</div>

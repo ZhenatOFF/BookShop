@@ -1,0 +1,28 @@
+﻿@using Ninject.Activation
+@model Domain.Models.Book
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="border border-warning border-3 bg-light rounded-3 m-3 p-2">
+        <div class="row gy-5">
+            <div class="col-10">
+                <h3>
+                    <strong>@Model.Name</strong>
+                </h3>
+                <h4>
+                    <strong>@Model.Author</strong>
+                </h4>
+            </div>
+            <div class="col-2">
+                <h4>
+                    <span class="badge bg-primary rounded-pill ">@Model.Price.ToString("# ₽")</span>
+                </h4>
+
+                <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.Id" class="btn btn-outline-success">В корзину</a>
+
+            </div>
+        </div>
+
+        <span class="lead">
+            @Model.Description
+        </span>
+</div>
